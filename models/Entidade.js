@@ -21,3 +21,5 @@ const ong1 = new Entidade("2", "silvestre em perigo", "12345678901234", "silvest
 const ong2 = new Entidade(3, "tutu o tatu", 12345678901234, "tutuotatu.com.br")
 console.log(ong1);
 console.log(ong2);
+
+module.exports = Entidade;
