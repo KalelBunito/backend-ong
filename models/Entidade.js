@@ -1,7 +1,7 @@
 class Entidade {
     //  parâmetro
     // toda classe possui propriedades e métodos
-    constructor(id, nome, cnpj, site) {
+    constructor(id, nome, cnpj, site, email, cidade, descricao) {
         if (isNaN(id) || isNaN(cnpj)) {
             throw new Error("A propriedade precisa ser um número válido")
         }
@@ -13,6 +13,9 @@ class Entidade {
         this.nome = nome
         this.cnpj = cnpj
         this.site = site
+        this.email = email
+        this.cidade = cidade
+        this.descricao = descricao
         this.mensagem = "ONG cadastrada com sucesso"
     }
 }
