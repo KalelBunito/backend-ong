@@ -1,10 +1,3 @@
-let ongs = [
-    { id: 1, nome: "salvacao", cnpj: 95446222000149, site: "sitetesste.com.br" },
-    { id: 2, nome: "salvacao", cnpj: 95446222000149, site: "sitetesste.com.br" },
-    { id: 3, nome: "salvacao", cnpj: 95446222000149, site: "sitetesste.com.br" },
-    { id: 4, nome: "salvacao", cnpj: 95446222000149, site: "sitetesste.com.br" },
-    { id: 5, nome: "salvacao", cnpj: 95446222000149, site: "sitetesste.com.br" }
-]
 
 const Entidade = require('../models/Entidade')
 
