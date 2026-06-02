@@ -6,7 +6,8 @@ class Entidade {
             throw new Error("ID precisa ser um número válido")
         }
 
-        if (isNaN(cnpj) || String(cnpj).length < 14){\n            throw new Error("O CNPJ precisa ser um número válido com pelo menos 14 dígitos")
+        if (isNaN(cnpj) || String(cnpj).length < 14) {
+            throw new Error("O CNPJ precisa ser um número válido com pelo menos 14 dígitos")
         }
         this.id = id
         this.nome = nome
