@@ -1,6 +1,10 @@
 
 const Entidade = require('../models/Entidade')
 
+// Array para armazenar as ONGs (em produção usar banco de dados)
+let ongs = [];
+let proximoId = 1;
+
 const listaOngs = (req, res) => {
     res.status(200).json({
         sucesso: true,
@@ -10,15 +14,27 @@ const listaOngs = (req, res) => {
 
 const createOngs = (req, res) => {
     try {
-        const { id, nome, cnpj, site } = req.body;
+        const { nome, cnpj, email, cidade, telefone, descricao } = req.body;
 
-        const novaOng = new Entidade(id, nome, cnpj, site);
+        // Validar campos obrigatórios
+        if (!nome || !cnpj || !email || !cidade || !telefone || !descricao) {
+            return res.status(400).json({ 
+                sucesso: false, 
+                mensagem: "Todos os campos são obrigatórios" 
+            });
+        }
+
+        const novaOng = new Entidade(proximoId, nome, parseInt(cnpj), "", email, cidade, descricao, telefone);
+        proximoId++;
 
         const ongFormatada = {
             id: novaOng.id,
             nome: novaOng.nome,
             cnpj: novaOng.cnpj,
-            site: novaOng.site,
+            email: novaOng.email,
+            cidade: novaOng.cidade,
+            telefone: novaOng.telefone,
+            descricao: novaOng.descricao,
             mensagem: novaOng.mensagem
         }
         ongs.push(ongFormatada)
@@ -30,7 +46,7 @@ const createOngs = (req, res) => {
         })
 
     } catch (error) {
-        res.status(400).json({ sucesso: false, mensagem: error })
+        res.status(400).json({ sucesso: false, mensagem: error.message })
     }
 }
 
