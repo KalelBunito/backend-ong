@@ -20,11 +20,35 @@ const createOngs = (req, res) => {
         if (!nome || !cnpj || !email || !cidade || !telefone || !descricao) {
             return res.status(400).json({ 
                 sucesso: false, 
-                mensagem: "Todos os campos são obrigatórios" 
+                mensagem: "Todos os campos são obrigatórios",
+                camposFaltantes: {
+                    nome: !nome,
+                    cnpj: !cnpj,
+                    email: !email,
+                    cidade: !cidade,
+                    telefone: !telefone,
+                    descricao: !descricao
+                }
             });
         }
 
-        const novaOng = new Entidade(proximoId, nome, parseInt(cnpj), "", email, cidade, descricao, telefone);
+        // Validar CNPJ
+        const cnpjNumero = parseInt(cnpj);
+        if (isNaN(cnpjNumero)) {
+            return res.status(400).json({ 
+                sucesso: false, 
+                mensagem: "CNPJ deve conter apenas números" 
+            });
+        }
+
+        if (String(cnpj).length < 14) {
+            return res.status(400).json({ 
+                sucesso: false, 
+                mensagem: "CNPJ deve ter no mínimo 14 dígitos" 
+            });
+        }
+
+        const novaOng = new Entidade(proximoId, nome, cnpjNumero, "", email, cidade, descricao, telefone);
         proximoId++;
 
         const ongFormatada = {
