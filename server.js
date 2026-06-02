@@ -4,6 +4,10 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const ongsRoutes = require('./routes/routesEntidades.js')
 
+const cors = require('cors');
+
+app.use(cors());
+
 app.use(express.json())
 
 app.get('/', (req, res)=>{
@@ -15,3 +19,4 @@ app.use('/api', ongsRoutes)
 app.listen(PORT, ()=>{
     console.log(`Servidor rodando em http://localhost:${PORT}`)
 })
+
